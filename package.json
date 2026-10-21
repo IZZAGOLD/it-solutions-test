@@ -1,0 +1,67 @@
+{
+  "name": "it-solutions-test",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "prisma generate && nest build",
+    "start": "npm run db:prepare && node dist/main.js",
+    "start:dev": "npm run build && npm run db:prepare && nest start --watch",
+    "db:prepare": "prisma migrate deploy && prisma db seed",
+    "db:seed": "prisma db seed",
+    "type-check": "tsc --noEmit && tsc -p test/tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky",
+    "precommit": "npm run type-check && npm run lint && npm run format:check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run test:e2e",
+    "test:e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config test/jest-e2e.json --runInBand"
+  },
+  "private": true,
+  "dependencies": {
+    "@apollo/server": "^5.5.1",
+    "@as-integrations/express5": "^1.1.2",
+    "@nestjs/apollo": "^13.4.2",
+    "@nestjs/common": "^11.1.27",
+    "@nestjs/config": "^4.0.4",
+    "@nestjs/core": "^11.1.27",
+    "@nestjs/graphql": "^13.4.2",
+    "@nestjs/platform-express": "^11.1.27",
+    "@prisma/adapter-pg": "7.10.1",
+    "@prisma/client": "7.10.1",
+    "dotenv": "^17.4.2",
+    "graphql": "^16.11.0",
+    "prisma": "7.10.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@nestjs/cli": "^11.0.23",
+    "@nestjs/testing": "^11.1.27",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.19.0",
+    "@types/supertest": "^6.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.72.0",
+    "@typescript-eslint/parser": "^8.72.0",
+    "eslint": "^10.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.7",
+    "husky": "^9.1.7",
+    "jest": "^30.4.2",
+    "prettier": "^3.9.4",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.11",
+    "typescript": "~5.9.3"
+  },
+  "overrides": {
+    "@nestjs/graphql": {
+      "@graphql-tools/utils": "^12.1.0"
+    }
+  }
+}

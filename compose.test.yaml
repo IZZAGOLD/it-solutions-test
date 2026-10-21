@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_DB: business_card_test
+      POSTGRES_USER: business_card_test
+      POSTGRES_PASSWORD: business_card_test
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'pg_isready',
+          '-h',
+          '127.0.0.1',
+          '-U',
+          'business_card_test',
+          '-d',
+          'business_card_test',
+        ]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+  tests:
+    build:
+      context: .
+      target: build
+    environment:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://business_card_test:business_card_test@db:5432/business_card_test
+    command: sh -c 'npm run db:prepare && npm test'
+    depends_on:
+      db:
+        condition: service_healthy
