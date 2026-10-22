@@ -2,7 +2,7 @@
 
 Backend-визитка на TypeScript, Node.js, NestJS, Prisma, GraphQL и PostgreSQL. API доступно для чтения через Apollo Sandbox.
 
-Инструкция по публикации: [деплой на Railway](docs/railway.md).
+Инструкция по публикации: [деплой на Render](docs/render.md).
 
 ## Запуск
 

@@ -60,7 +60,7 @@ describe('Визитка (GraphQL + PostgreSQL)', () => {
   it('проверка готовности учитывает соединение с PostgreSQL', async () => {
     const response = await request(app.getHttpServer())
       .get('/health')
-      .set('Host', 'healthcheck.railway.app')
+      .set('Host', 'business-card.onrender.com')
       .expect(200);
 
     expect(response.body).toEqual({ status: 'ok' });
